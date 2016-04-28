@@ -4,16 +4,8 @@ set -e
 set -u
 
 echo "bootstraping environment..."
-# Create directories for supervisor's UNIX socket and logs (which might be missing
-# as container might start with /data mounted from another data-container).
-
 mkdir -p /data/conf /data/run /data/logs
 chmod 711 /data/conf /data/run /data/logs
-
-# chown -R www-data:www-data /var/www
-# chown -R www-data:www-data /var/www
-# chmod -R 775 /var/www
-
 
 if [ "$(ls /config/init/)" ]; then
   for init in /config/init/*.sh; do
@@ -46,6 +38,4 @@ if [ "${APPSERVER_OVERRIDE_REDIS_CONF}" = TRUE ]; then
 fi
 
 echo "start supervisor"
-more /etc/supervisor/conf.d
-/etc/init.d/supervisor stop
-/etc/init.d/supervisor start
+/usr/bin/supervisord
