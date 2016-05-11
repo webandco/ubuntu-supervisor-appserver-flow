@@ -11,12 +11,42 @@ Configure the docker-compose.yaml to your needs und you are ready to go.
 APPSERVER_PHP_MEMORY_LIMIT=512M
 APPSERVER_OVERRIDE_APPSERVER_CONF=TRUE // override appserver default conf to run on port 80 (default port 8090)
 APPSERVER_OVERRIDE_VHOST_CONF=TRUE // overide vhost setup and provide a preconfigured vhost for Flow and Neos CMS applications
+APPSERVER_VHOST_WEB_ROOT=Web //override web root dir
 APPSERVER_OVERRIDE_REDIS_CONF=FALSE // enable redis if needed
 APPSERVER_VHOST_DOMAIN=xxx.whatever // set a custom domain - docker.vm is always available
 ```
 
+##Interactive goodies
+If you have access to an interactive container you can use this commands out of the box:
+
+###general
+```php
+alias cd..="cd .."
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias h="history"
+alias c="composer"
+alias g="git"
+alias ll="ls -l"
+alias la="ls -la"
+```
+
+###flow
+```php
+alias f='./flow'
+alias fh='./flow help'
+alias flow="./flow"
+alias fcf='flow flow:cache:flush'
+alias fcff='flow flow:cache:flush --force'
+alias fcw='flow cache:warmup'
+alias fcffw='fcff; fcw'
+alias fcv="flow configuration:validate —type"
+```
+
 ##How does it work
-The appserver will listen on configured port with document root `/var/www/Web` for a Neos setup. Usualy we mount `/var/www` as project root in the volumes configuration.
+The appserver will listen on configured port with document root `/var/www/{public}` for a Neos setup. Usualy we mount `/var/www` as project root in the volumes configuration.
 
 ##Example configuration
 ```yaml
