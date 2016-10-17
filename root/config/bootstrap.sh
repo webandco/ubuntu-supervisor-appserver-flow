@@ -13,7 +13,7 @@ if [ "$(ls /config/init/)" ]; then
   done
 fi
 
-if [ "${APPSERVER_OVERRIDE_APPSERVER_CONF}" = TRUE ]; then
+if [ "${APPSERVER_OVERRIDE_APPSERVER_CONF}" = TRUE ] || [ "${APPSERVER_OVERRIDE_CONF}" = TRUE ]; then
     echo "configure appserver"
     cp /etc/appserver/appserver.xml /opt/appserver/etc/appserver/appserver.xml
     for envname in ${!APPSERVER_CONFIG_*}; do
